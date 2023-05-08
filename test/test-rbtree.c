@@ -132,9 +132,9 @@ void test_to_array(rbtree *t, const key_t *arr, const size_t n) {
 
   insert_arr(t, arr, n);
   qsort((void *)arr, n, sizeof(key_t), comp);
-
   key_t *res = calloc(n, sizeof(key_t));
   rbtree_to_array(t, res, n);
+  
   for (int i = 0; i < n; i++) {
     assert(arr[i] == res[i]);
   }
@@ -317,8 +317,8 @@ void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
   }
 
   for (int i = 0; i < n; i++) {
+    /////////////////////////////////////////////
     node_t *p = rbtree_find(t, arr[i]);
-    // printf("arr[%d] = %d\n", i, arr[i]);
     assert(p != NULL);
     assert(p->key == arr[i]);
     rbtree_erase(t, p);
@@ -368,16 +368,31 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 }
 
 int main(void) {
+  // rb = test_int()
+  printf("\n-----11가지 테스트-----\n");
   test_init();
+  printf("1. test_init() completed\n");
   test_insert_single(1024);
+  printf("2. test_insert_single() completed\n");
   test_find_single(512, 1024);
+  printf("3. test_find_single() completed\n");
   test_erase_root(128);
+  printf("4. test_erase_root() completed\n");
   test_find_erase_fixed();
+  printf("5. test_find_erase_fixed() completed\n");
   test_minmax_suite();
+  printf("6. test_minmax_suite() completed\n");
   test_to_array_suite();
+  printf("7. test_to_array_suite() completed\n");
   test_distinct_values();
+  printf("8. test_distinct_values() completed\n");
   test_duplicate_values();
+  printf("9. test_duplicate_values() completed\n");
   test_multi_instance();
+  printf("10. test_multi_instance() completed\n");
   test_find_erase_rand(10000, 17);
+  printf("11. test_find_erase_rand() completed\n");
   printf("Passed all tests!\n");
+
+  return 0;
 }
