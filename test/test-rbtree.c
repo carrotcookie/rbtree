@@ -132,9 +132,9 @@ void test_to_array(rbtree *t, const key_t *arr, const size_t n) {
 
   insert_arr(t, arr, n);
   qsort((void *)arr, n, sizeof(key_t), comp);
-
   key_t *res = calloc(n, sizeof(key_t));
   rbtree_to_array(t, res, n);
+  
   for (int i = 0; i < n; i++) {
     assert(arr[i] == res[i]);
   }
@@ -393,4 +393,6 @@ int main(void) {
   test_find_erase_rand(10000, 17);
   printf("11. test_find_erase_rand() completed\n");
   printf("Passed all tests!\n");
+
+  return 0;
 }
