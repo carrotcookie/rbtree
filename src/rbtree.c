@@ -362,9 +362,13 @@ void rbtree_transplant(rbtree *t, node_t *empty, node_t *replace) {
 }
 
 int rbtree_to_array(const rbtree *t, key_t *arr, const size_t n) {
-  // 오름차순 출력 -> 중위순회 -> inorder
+  // 오름차순 출력 -> 중위순회(inorder)
+  if (t->root == t->nil)
+    return -1;
+
   int idx = 0;
   rbtree_in_order(t, t->root, arr, &idx);
+
   return 0;
 }
 
