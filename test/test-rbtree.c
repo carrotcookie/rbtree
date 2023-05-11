@@ -366,7 +366,26 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
   delete_rbtree(t);
 }
 
+void mytest() {
+  rbtree *t = new_rbtree();
+  const key_t arr[] = {10, 5, 8, 34, 67, 23, 156, 24, 2, 12};
+
+  for (int i = 0; i < 10; i++) {
+    node_t *p = rbtree_insert(t, arr[i]);
+  }
+  for (int i = 0; i < 10; i++) {
+    node_t *p = rbtree_find(t, arr[i]);
+    // printf("%d의 부모는 %d \n", p->key, p->parent->key);
+  }
+
+  printf("%d %d %d\n", t->root->right->right->right->key, t->root->right->right->right->color, t->root->right->right->right->right->parent->key);
+  assert(t->root->right->right->right->right->parent != NULL);
+
+  delete_rbtree(t);
+}
+
 int main(void) {
+  // mytest();
   printf("\n-----11가지 테스트-----\n");
   test_init();
   printf("1. test_init() completed\n");
